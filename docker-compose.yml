@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  springboot-app:
+    image: mfxeridia/accessing-data-mysql
+    ports:
+      - 8080:8080
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: my_user
+      MYSQL_PASSWORD: root
+      MYSQL_DB: mysql_db
+
+  mysql:
+    image: 'mysql:latest'
+    restart: always
+    volumes:
+      - './mysql_data:/var/lib/mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mysql_db
+      MYSQL_USER: my_user
+      MYSQL_PASSWORD: root
+    ports:
+      - '3306:3306'
